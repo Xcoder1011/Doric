@@ -42,7 +42,7 @@ declare module 'doric/lib/src/runtime/global' {
     global {
             const context: BridgeContext;
             const Environment: {
-                    platform: "Android" | "iOS" | "Qt" | "web";
+                    platform: "Android" | "iOS" | "Qt" | "web" | "wechat-miniprogram";
                     platformVersion: string;
                     appName: string;
                     appVersion: string;

@@ -30,7 +30,7 @@ export declare type BridgeContext = {
 declare global {
     const context: BridgeContext;
     const Environment: {
-        platform: "Android" | "iOS" | "Qt" | "web";
+        platform: "Android" | "iOS" | "Qt" | "web" | "wechat-miniprogram";
         platformVersion: string;
         appName: string;
         appVersion: string;

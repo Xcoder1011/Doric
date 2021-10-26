@@ -1,0 +1,2 @@
+<!--compoents/DoricText/DoricText.wxml-->
+<text>{{doricModel.text}}</text>

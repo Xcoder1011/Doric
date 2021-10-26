@@ -6,7 +6,7 @@
   "miniprogramRoot": "miniprogram/",
   "compileType": "miniprogram",
   "libVersion": "2.15.0",
-  "projectname": "doric-wechat-miniprogram",
+  "projectname": "miniprogram-1",
   "setting": {
     "urlCheck": true,
     "es6": true,
@@ -16,7 +16,7 @@
     "minified": true,
     "newFeature": false,
     "coverView": true,
-    "nodeModules": false,
+    "nodeModules": true,
     "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
     "scopeDataCheck": false,
@@ -41,14 +41,20 @@
     "packNpmRelationList": [],
     "minifyWXSS": true,
     "disableUseStrict": false,
+    "minifyWXML": true,
     "showES6CompileOption": false,
     "useCompilerPlugins": [
       "typescript"
     ],
-    "minifyWXML": true
+    "packNpmManually":true,
+    "packNpmRelationList": [
+      {
+      "packageJsonPath": "./package.json",
+      "miniprogramNpmDistDir": "./miniprogram/"
+     }]
   },
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
-  "appid": "wxb94dc3e247eb8764",
+  "appid": "wx61b1563243d12109",
   "condition": {}
 }

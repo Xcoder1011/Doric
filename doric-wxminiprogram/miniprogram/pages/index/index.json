@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "DoricNode": "../../compoents/DoricNode/DoricNode"
+  }
 }

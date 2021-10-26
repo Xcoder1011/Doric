@@ -1,0 +1,2 @@
+<!--compoents/DoricImage/DoricImage.wxml-->
+<image src="{{doricModel.imageUrl}}"></image>

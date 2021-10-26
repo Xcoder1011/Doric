@@ -1,0 +1,4 @@
+<!--compoents/DoricNode.wxml-->
+<DoricText wx:if="{{doricModel.nativeViewModel.type === 'Text'}}" doricModel="{{doricModel}}"></DoricText>
+<DoricImage wx:elif="{{doricModel.nativeViewModel.type=== 'Image'}}" doricModel="{{doricModel}}"></DoricImage>
+<DoricVLayout wx:elif="{{doricModel.nativeViewModel.type === 'VLayout'}}" doricModel="{{doricModel}}"></DoricVLayout>

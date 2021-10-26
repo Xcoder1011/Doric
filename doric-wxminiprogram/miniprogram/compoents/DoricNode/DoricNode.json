@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "DoricText": "../DoricText/DoricText",
+    "DoricImage": "../DoricImage/DoricImage",
+    "DoricVLayout": "../DoricVLayout/DoricVLayout"
+  }
+}

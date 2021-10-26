@@ -1,0 +1,3 @@
+<!--compoents/DoricVLayout/DoricVLayout.wxml-->
+<DoricNode wx:for="{{doricModel.children}}" wx:key="{{item.viewId}}" doricModel="{{item}}">
+</DoricNode>

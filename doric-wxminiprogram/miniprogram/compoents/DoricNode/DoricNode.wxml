@@ -1,7 +1,8 @@
 <!--compoents/DoricNode.wxml-->
-<DoricText wx:if="{{doricModel.nativeViewModel.type === 'Text'}}" doricModel="{{doricModel}}" />
-<DoricImage wx:elif="{{doricModel.nativeViewModel.type=== 'Image'}}" doricModel="{{doricModel}}" />
-<DoricVLayout wx:elif="{{doricModel.nativeViewModel.type === 'VLayout'}}" doricModel="{{doricModel}}" />
-<DoricStack wx:elif="{{doricModel.nativeViewModel.type === 'Stack'}}" doricModel="{{doricModel}}" />
-<DoricRoot wx:elif="{{doricModel.nativeViewModel.type === 'Root'}}" doricModel="{{doricModel}}" />
+<DoricText wx:if="{{doricModel.nativeViewModel.type === 'Text'}}" doricModel="{{doricModel}}" doricStyle="{{doricStyle}}" />
+<DoricImage wx:elif="{{doricModel.nativeViewModel.type=== 'Image'}}" doricModel="{{doricModel}}" doricStyle="{{doricStyle}}" />
+<DoricVLayout wx:elif="{{doricModel.nativeViewModel.type === 'VLayout'}}" doricModel="{{doricModel}}" doricStyle="{{doricStyle}}" />
+<DoricHLayout wx:elif="{{doricModel.nativeViewModel.type === 'HLayout'}}" doricModel="{{doricModel}}" doricStyle="{{doricStyle}}" />
+<DoricStack wx:elif="{{doricModel.nativeViewModel.type === 'Stack'}}" doricModel="{{doricModel}}" doricStyle="{{doricStyle}}" />
+<DoricRoot wx:elif="{{doricModel.nativeViewModel.type === 'Root'}}" doricModel="{{doricModel}}" doricStyle="{{doricStyle}}" />
 <text wx:else>Error:{{doricModel.nativeViewModel.type}}</text>

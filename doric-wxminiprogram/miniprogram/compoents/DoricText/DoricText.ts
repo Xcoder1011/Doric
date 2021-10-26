@@ -8,6 +8,9 @@ Component({
   properties: {
     doricModel: {
       type: Object
+    },
+    doricStyle: {
+      type: Object
     }
   },
 
@@ -15,7 +18,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    
+
   },
 
   /**
@@ -23,13 +26,16 @@ Component({
    */
   methods: {
   },
-  lifetimes:{
-    attached :function(){
+  lifetimes: {
+    attached: function () {
       const props = this.properties.doricModel.nativeViewModel.props
+      const doricStyle = this.properties.doricStyle
+      doricStyle["font-size"] = toPixelString(props.textSize)
+      doricStyle["color"] = toRGBAString(props.textColor)
+      const cssStyle = Object.entries(doricStyle).map(e=>`${e[0]}:${e[1]}`).join(";")
       this.setData({
-        text:props.text,
-        textColor:toRGBAString(props.textColor),
-        textSize:toPixelString(props.textSize)
+        cssStyle,
+        text: props.text,
       })
     }
   }

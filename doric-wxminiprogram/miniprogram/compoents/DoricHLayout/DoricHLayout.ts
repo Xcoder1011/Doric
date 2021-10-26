@@ -1,4 +1,4 @@
-// compoents/DoricImage/DoricImage.ts
+// compoents/DoricHLayout/DoricHLayout.ts
 Component({
   /**
    * 组件的属性列表
@@ -7,7 +7,7 @@ Component({
     doricModel: {
       type: Object
     },
-    doricStyle: {
+    doricStyle:{
       type: Object
     }
   },

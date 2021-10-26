@@ -5,6 +5,7 @@
     "DoricImage": "../DoricImage/DoricImage",
     "DoricVLayout": "../DoricVLayout/DoricVLayout",
     "DoricStack": "../DoricStack/DoricStack",
-    "DoricRoot": "../DoricRoot/DoricRoot"
+    "DoricRoot": "../DoricRoot/DoricRoot",
+    "DoricHLayout": "../DoricHLayout/DoricHLayout"
   }
 }

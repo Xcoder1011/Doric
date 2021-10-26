@@ -1,0 +1,5 @@
+/* compoents/DoricHLayout/DoricHLayout.wxss */
+.doric-hlayout {
+  display: flex;
+  flex-direction: row;
+}

@@ -1,3 +1,5 @@
+import { toPixelString, toRGBAString } from "../../doric/utils"
+
 // compoents/DoricText/DoricText.ts
 Component({
   /**
@@ -23,9 +25,11 @@ Component({
   },
   lifetimes:{
     attached :function(){
-      console.log(this.properties)
+      const props = this.properties.doricModel.nativeViewModel.props
       this.setData({
-        doricModel:this.properties.doricModel
+        text:props.text,
+        textColor:toRGBAString(props.textColor),
+        textSize:toPixelString(props.textSize)
       })
     }
   }

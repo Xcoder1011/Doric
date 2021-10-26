@@ -1,4 +1,19 @@
 'use strict';
+
+function nativeLog(type, message){
+    switch(type){
+        case 'e':
+            console.error(message);
+            break;
+        case 'w':
+            console.warn(message);
+            break;
+        default:
+            console.log(message);
+            break;
+    }
+}
+
 var doric = (function (exports) {
     'use strict';
 

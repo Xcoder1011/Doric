@@ -1,11 +1,11 @@
-// compoents/DoricNode.ts
+// compoents/DoricRoot/DoricRoot.ts
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    doricModel: {
-      type: Object
+    doricModel:{
+      type:Object
     }
   },
 

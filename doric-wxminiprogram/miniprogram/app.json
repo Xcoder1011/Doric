@@ -1,5 +1,6 @@
 {
   "pages": [
+    "compoents/DoricPage/DoricPage",
     "pages/index/index",
     "pages/logs/logs"
   ],

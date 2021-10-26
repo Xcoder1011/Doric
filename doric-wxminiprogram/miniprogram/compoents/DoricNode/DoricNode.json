@@ -3,6 +3,8 @@
   "usingComponents": {
     "DoricText": "../DoricText/DoricText",
     "DoricImage": "../DoricImage/DoricImage",
-    "DoricVLayout": "../DoricVLayout/DoricVLayout"
+    "DoricVLayout": "../DoricVLayout/DoricVLayout",
+    "DoricStack": "../DoricStack/DoricStack",
+    "DoricRoot": "../DoricRoot/DoricRoot"
   }
 }

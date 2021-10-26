@@ -1,0 +1,2 @@
+<!--compoents/DoricStack/DoricStack.wxml-->
+<DoricNode wx:for="{{doricModel.children}}" wx:key="{{item.viewId}}" doricModel="{{item}}" id="{{item.viewId}}"/>

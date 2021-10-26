@@ -20,5 +20,5 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view> -->
-  <DoricNode doricModel="{{doricModel}}"></DoricNode>
+  <!-- <DoricPanel panel="{{panel}}"/> -->
 </view>

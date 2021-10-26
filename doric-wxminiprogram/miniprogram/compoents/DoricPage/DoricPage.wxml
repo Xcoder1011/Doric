@@ -1,0 +1,4 @@
+<!--compoents/DoricPage/DoricPage.wxml-->
+<view class="container">
+<DoricNode doricModel= "{{doricModel}}"></DoricNode>
+</view>

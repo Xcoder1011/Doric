@@ -1,5 +1,5 @@
 import { NativeViewModel } from "doric"
-import { getChildren } from "../../doric/utils"
+import { DoricModel, getChildren, toCSSStyle } from "../../doric/utils"
 
 // compoents/DoricHLayout/DoricHLayout.ts
 Component({
@@ -8,9 +8,6 @@ Component({
    */
   properties: {
     doricModel: {
-      type: Object
-    },
-    doricStyle:{
       type: Object
     },
   },
@@ -30,11 +27,10 @@ Component({
   },
   lifetimes: {
     attached: function () {
-      const doricStyle = this.properties.doricStyle
-      const cssStyle = Object.entries(doricStyle).map(e => `${e[0]}:${e[1]}`).join(";")
+      const doricModel = this.properties.doricModel as DoricModel
       this.setData({
-        cssStyle,
-        children: getChildren(this.properties.doricModel as NativeViewModel)
+        cssStyle: toCSSStyle(doricModel.cssStyle),
+        children: getChildren(doricModel)
       })
     }
   }

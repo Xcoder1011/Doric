@@ -1,5 +1,5 @@
 import { NativeViewModel, VLayout } from "doric"
-import { LEFT, RIGHT, CENTER_X, CENTER_Y, BOTTOM, TOP, getChildren } from "../../doric/utils"
+import { LEFT, RIGHT, CENTER_X, CENTER_Y, BOTTOM, TOP, getChildren, DoricModel } from "../../doric/utils"
 
 // compoents/DoricVLayout/DoricVLayout.ts
 Component({
@@ -8,9 +8,6 @@ Component({
    */
   properties: {
     doricModel: {
-      type: Object
-    },
-    doricStyle: {
       type: Object
     },
   },
@@ -30,9 +27,10 @@ Component({
   },
   lifetimes: {
     attached: function () {
-      const nativeViewModel = this.properties.doricModel as NativeViewModel
+      const doricModel = this.properties.doricModel as DoricModel
+      const nativeViewModel = doricModel.nativeViewModel
       const props = nativeViewModel.props as Partial<VLayout>
-      const doricStyle = this.properties.doricStyle
+      const doricStyle = doricModel.cssStyle
 
       if (props.space) {
         let space = props.space
@@ -58,7 +56,7 @@ Component({
       const cssStyle = Object.entries(doricStyle).map(e => `${e[0]}:${e[1]}`).join(";")
       this.setData({
         cssStyle,
-        children: getChildren(nativeViewModel)
+        children: getChildren(doricModel)
       })
     }
   }

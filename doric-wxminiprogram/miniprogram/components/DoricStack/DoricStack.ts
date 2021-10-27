@@ -1,5 +1,5 @@
 import { NativeViewModel, Stack } from "doric"
-import { getChildren } from "../../doric/utils"
+import { DoricModel, getChildren, toCSSStyle } from "../../doric/utils"
 
 // compoents/DoricStack/DoricStack.ts
 Component({
@@ -30,13 +30,10 @@ Component({
   },
   lifetimes: {
     attached: function () {
-      const nativeViewModel = this.properties.doricModel as NativeViewModel
-      const props = nativeViewModel.props as Partial<Stack>
-      const doricStyle = this.properties.doricStyle
-      const cssStyle = Object.entries(doricStyle).map(e => `${e[0]}:${e[1]}`).join(";")
+      const doricModel = this.properties.doricModel as DoricModel
       this.setData({
-        cssStyle,
-        children: getChildren(nativeViewModel)
+        cssStyle: toCSSStyle(doricModel.cssStyle),
+        children: getChildren(doricModel)
       })
     }
   }

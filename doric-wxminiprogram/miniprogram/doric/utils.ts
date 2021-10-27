@@ -1,17 +1,28 @@
 import { NativeViewModel } from "doric"
 
+export interface DoricModel {
+  nativeViewModel: NativeViewModel
+  contextId: string
+  cssStyle: Record<string, string>
+}
+
 export function toCSSStyle(css: Record<string, any>) {
   return Object.entries(css).map(e => `${e[0]}:${e[1]}`).join(";")
 }
 
-export function getChildren(nativeViewModel: NativeViewModel) {
-  let children = undefined
-  if (nativeViewModel.props.children) {
-    const childrenViewIds = nativeViewModel.props.children as string[]
-    const subviews = nativeViewModel.props.subviews as NativeViewModel[]
-    children = childrenViewIds.map(e => subviews.find(subview => subview.id === e))
+export function getChildren(doricModel: DoricModel): DoricModel[] {
+  if (doricModel.nativeViewModel.props.children) {
+    const childrenViewIds = doricModel.nativeViewModel.props.children as string[]
+    const subviews = doricModel.nativeViewModel.props.subviews as NativeViewModel[]
+    return childrenViewIds.map(e => {
+      return {
+        contextId: doricModel.contextId,
+        nativeViewModel: subviews.find(subview => subview.id === e) as NativeViewModel,
+        cssStyle: {}
+      }
+    })
   }
-  return children
+  return []
 }
 
 

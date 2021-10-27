@@ -1,6 +1,6 @@
 import { LayoutSpec, NativeViewModel, View } from "doric"
-import { toPixelString, toRGBAString } from "../../doric/utils"
-
+import { toPixelString, toRGBAString ,DoricModel} from "../../doric/utils"
+import { obtainContext } from "../../doric/context"
 // compoents/DoricNode.ts
 Component({
   /**
@@ -9,7 +9,7 @@ Component({
   properties: {
     doricModel: {
       type: Object
-    },
+    }
   },
 
   /**
@@ -27,9 +27,9 @@ Component({
   },
   lifetimes: {
     attached: function () {
-      const doricModel = this.properties.doricModel as NativeViewModel
-      const props = doricModel.props as Partial<View>
-      const doricStyle: Record<string, string> = {}
+      const doricModel = this.properties.doricModel as DoricModel
+      const props = doricModel.nativeViewModel.props as Partial<View>
+      const doricStyle: Record<string, string> = doricModel.cssStyle
 
       if (props.border) {
         doricStyle["border-style"] = "solid"
@@ -82,10 +82,10 @@ Component({
       if (props.backgroundColor !== undefined) {
         doricStyle["background-color"] = toRGBAString(props.backgroundColor as unknown as number)
       }
-
+      doricModel.cssStyle = doricStyle
       this.setData({
-        doricModel: this.properties.doricModel,
-        doricStyle,
+        doricModel: doricModel,
+        type:doricModel.nativeViewModel.type
       })
     }
   }

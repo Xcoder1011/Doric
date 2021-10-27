@@ -1,7 +1,12 @@
+import { uniqueId } from "doric"
+import { createContext } from "../../doric/context"
 import { HelloDoric } from "../../doric/HelloDoric"
 import { SnakePanel } from "../../doric/Snake"
+import { DoricModel } from "../../doric/utils"
 
-const panel = new HelloDoric
+const contextId = uniqueId("context")
+const context = createContext(contextId,HelloDoric)
+const panel = context.entity
 
 const createCallback = Reflect.get(panel, "__onCreate__")
 const initCallback = Reflect.get(panel, "__init__")
@@ -36,7 +41,13 @@ Page({
       const width = res[0].width
       const height = res[0].height
       Reflect.apply(buildCallback, panel, [{ width, height }])
-      self.setData({ doricModel: panel.getRootView().toModel() })
+      self.setData({ 
+        doricModel:{
+          contextId,
+          nativeViewModel: panel.getRootView().toModel(),
+          cssStyle:{}
+        } as DoricModel
+      })
     })
   },
 

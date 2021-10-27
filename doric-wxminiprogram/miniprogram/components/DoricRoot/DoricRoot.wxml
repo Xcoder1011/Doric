@@ -1,2 +1,2 @@
 <!--compoents/DoricRoot/DoricRoot.wxml-->
-<DoricNode wx:for="{{doricModel.children}}" wx:key="viewId" doricModel="{{item}}" id="{{item.viewId}}"/>
+<DoricNode wx:for="{{doricModel.children}}" wx:key="viewId" doricModel="{{item}}" id="{{item.viewId}}" doricParentModel="{{doricModel}}"/>

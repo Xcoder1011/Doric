@@ -9,7 +9,10 @@ Component({
   properties: {
     doricModel: {
       type: Object
-    }
+    },
+    doricParentModel: {
+      type: Object
+    },
   },
 
   /**
@@ -29,12 +32,46 @@ Component({
     attached: function () {
       const props = this.properties.doricModel.nativeViewModel.props
       const doricStyle: Record<string, string> = {}
-      if (props.layoutConfig && props.layoutConfig.margin) {
-        doricStyle["margin-left"] = toPixelString(props.layoutConfig.margin.left || 0)
-        doricStyle["margin-right"] = toPixelString(props.layoutConfig.margin.right || 0)
-        doricStyle["margin-top"] = toPixelString(props.layoutConfig.margin.top || 0)
-        doricStyle["margin-bottom"] = toPixelString(props.layoutConfig.margin.bottom || 0)
+      if (this.properties.doricParentModel) {
+        let space = 0
+        let parentType = this.properties.doricParentModel.nativeViewModel.type
+
+        if (parentType === "VLayout" || parentType === "HLayout") {
+          const parentProps = this.properties.doricParentModel.nativeViewModel.props
+          if (parentProps.space) {
+            space = parentProps.space
+          }
+        }
+
+        let isLast = false
+        for (let index = 0; index < this.properties.doricParentModel.children.length; index++) {
+          const element = this.properties.doricParentModel.children[index];
+          if (element.nativeViewModel.id === this.properties.doricModel.viewId) {
+            if (index == this.properties.doricParentModel.children.length - 1) {
+              isLast = true
+            }
+          }
+        }
+
+        if (props.layoutConfig) {
+          doricStyle["margin-left"] = toPixelString(props.layoutConfig?.margin?.left || 0)
+          if (parentType === "HLayout") {
+            doricStyle["margin-right"] = toPixelString(isLast ? 0 : space
+              + (props.layoutConfig?.margin?.right || 0))
+          } else {
+            doricStyle["margin-right"] = toPixelString(props.layoutConfig?.margin?.right || 0)
+          }
+
+          doricStyle["margin-top"] = toPixelString(props.layoutConfig?.margin?.top || 0)
+
+          if (parentType === "VLayout") {
+            doricStyle["margin-bottom"] = toPixelString(isLast ? 0 : space + (props.layoutConfig?.margin?.bottom || 0))
+          } else {
+            doricStyle["margin-bottom"] = toPixelString(props.layoutConfig?.margin?.bottom || 0)
+          }
+        }
       }
+
       if (props.border) {
         doricStyle["border-style"] = "solid"
         doricStyle["border-width"] = toPixelString(props.border.width)

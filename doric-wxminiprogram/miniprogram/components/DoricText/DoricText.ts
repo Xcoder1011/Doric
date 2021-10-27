@@ -11,7 +11,7 @@ Component({
     },
     doricStyle: {
       type: Object
-    }
+    },
   },
 
   /**
@@ -32,7 +32,7 @@ Component({
       const doricStyle = this.properties.doricStyle
       doricStyle["font-size"] = toPixelString(props.textSize)
       doricStyle["color"] = toRGBAString(props.textColor)
-      const cssStyle = Object.entries(doricStyle).map(e=>`${e[0]}:${e[1]}`).join(";")
+      const cssStyle = Object.entries(doricStyle).map(e => `${e[0]}:${e[1]}`).join(";")
       this.setData({
         cssStyle,
         text: props.text,

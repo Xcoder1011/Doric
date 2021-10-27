@@ -11,7 +11,7 @@ Component({
     },
     doricStyle: {
       type: Object
-    }
+    },
   },
 
   /**

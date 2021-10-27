@@ -9,7 +9,7 @@ Component({
     },
     doricStyle:{
       type: Object
-    }
+    },
   },
 
   /**

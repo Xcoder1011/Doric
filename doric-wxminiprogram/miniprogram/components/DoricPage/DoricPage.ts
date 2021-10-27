@@ -1,6 +1,7 @@
 import { HelloDoric } from "../../doric/HelloDoric"
+import { SnakePanel } from "../../doric/Snake"
 
-const panel = new HelloDoric
+const panel = new SnakePanel
 
 const createCallback = Reflect.get(panel, "__onCreate__")
 const initCallback = Reflect.get(panel, "__init__")
@@ -16,7 +17,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    doricModel: panel.getRootView()
   },
 
   /**
@@ -32,7 +32,7 @@ Page({
   onReady() {
     let query = wx.createSelectorQuery().in(this)
     const self = this
-    query.select('.container').boundingClientRect().exec(function (res) {
+    query.select('.doric-container').boundingClientRect().exec(function (res) {
       const width = res[0].width
       const height = res[0].height
       Reflect.apply(buildCallback, panel, [{ width, height }])

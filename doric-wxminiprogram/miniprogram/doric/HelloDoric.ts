@@ -33,7 +33,7 @@ export class HelloDoric extends Panel {
         }),
       ],
       {
-        layoutConfig: layoutConfig().fit().configAlignment(Gravity.Center),
+        layoutConfig: layoutConfig().most().configAlignment(Gravity.Center),
         space: 20,
         gravity: Gravity.Center,
       }

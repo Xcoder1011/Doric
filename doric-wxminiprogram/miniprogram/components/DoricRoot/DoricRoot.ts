@@ -7,6 +7,9 @@ Component({
     doricModel: {
       type: Object
     },
+    doricStyle: {
+      type: Object
+    },
   },
 
   /**
@@ -24,8 +27,11 @@ Component({
   },
   lifetimes: {
     attached: function () {
+      const doricStyle = this.properties.doricStyle
+      const cssStyle = Object.entries(doricStyle).map(e => `${e[0]}:${e[1]}`).join(";")
       this.setData({
-        doricModel: this.properties.doricModel
+        doricModel: this.properties.doricModel,
+        cssStyle
       })
     }
   }

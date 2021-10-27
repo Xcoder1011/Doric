@@ -1,4 +1,5 @@
-import { LEFT, RIGHT, CENTER, CENTER_X, CENTER_Y, BOTTOM, TOP } from "../../doric/utils"
+import { NativeViewModel, VLayout } from "doric"
+import { LEFT, RIGHT, CENTER_X, CENTER_Y, BOTTOM, TOP, getChildren } from "../../doric/utils"
 
 // compoents/DoricVLayout/DoricVLayout.ts
 Component({
@@ -29,14 +30,15 @@ Component({
   },
   lifetimes: {
     attached: function () {
-      const props = this.properties.doricModel.nativeViewModel.props
+      const nativeViewModel = this.properties.doricModel as NativeViewModel
+      const props = nativeViewModel.props as Partial<VLayout>
       const doricStyle = this.properties.doricStyle
 
       if (props.space) {
         let space = props.space
       }
       if (props.gravity) {
-        let gravity = props.gravity
+        let gravity = props.gravity as unknown as number
         if ((gravity & LEFT) === LEFT) {
           doricStyle["align-items"] = "flex-start"
         } else if ((gravity & RIGHT) === RIGHT) {
@@ -55,8 +57,8 @@ Component({
 
       const cssStyle = Object.entries(doricStyle).map(e => `${e[0]}:${e[1]}`).join(";")
       this.setData({
-        doricModel: this.properties.doricModel,
-        cssStyle
+        cssStyle,
+        children: getChildren(nativeViewModel)
       })
     }
   }

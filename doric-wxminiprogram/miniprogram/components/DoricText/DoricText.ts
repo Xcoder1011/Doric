@@ -1,4 +1,5 @@
-import { toPixelString, toRGBAString } from "../../doric/utils"
+import { NativeViewModel, Text } from "doric"
+import { toCSSStyle, toPixelString, toRGBAString } from "../../doric/utils"
 
 // compoents/DoricText/DoricText.ts
 Component({
@@ -28,19 +29,18 @@ Component({
   },
   lifetimes: {
     attached: function () {
-      const props = this.properties.doricModel.nativeViewModel.props
+      const props = (this.properties.doricModel as NativeViewModel).props as Partial<Text>
       const doricStyle = this.properties.doricStyle
       if (props.textSize) {
         doricStyle["font-size"] = toPixelString(props.textSize)
       }
-      
+
       if (props.textColor) {
-        doricStyle["color"] = toRGBAString(props.textColor)
+        doricStyle["color"] = toRGBAString(props.textColor as unknown as number)
       }
 
-      const cssStyle = Object.entries(doricStyle).map(e => `${e[0]}:${e[1]}`).join(";")
       this.setData({
-        cssStyle,
+        cssStyle: toCSSStyle(doricStyle),
         text: props.text,
       })
     }

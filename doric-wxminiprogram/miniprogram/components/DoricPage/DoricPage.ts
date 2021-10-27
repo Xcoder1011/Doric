@@ -1,7 +1,7 @@
 import { HelloDoric } from "../../doric/HelloDoric"
 import { SnakePanel } from "../../doric/Snake"
 
-const panel = new SnakePanel
+const panel = new HelloDoric
 
 const createCallback = Reflect.get(panel, "__onCreate__")
 const initCallback = Reflect.get(panel, "__init__")

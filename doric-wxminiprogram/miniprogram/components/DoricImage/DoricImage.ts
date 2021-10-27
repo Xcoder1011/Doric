@@ -1,3 +1,6 @@
+import { Image, NativeViewModel } from "doric"
+import { toCSSStyle } from "../../doric/utils"
+
 // compoents/DoricImage/DoricImage.ts
 Component({
   /**
@@ -23,7 +26,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onload: function(event: any) {
+    onload: function (event: any) {
       const doricStyle = this.properties.doricStyle
       if (doricStyle["width"] === "max-content") {
         doricStyle["width"] = `${event.detail.width}px`
@@ -40,11 +43,10 @@ Component({
   },
   lifetimes: {
     attached: function () {
-      const doricStyle = this.properties.doricStyle
-      const cssStyle = Object.entries(doricStyle).map(e => `${e[0]}:${e[1]}`).join(";")
+      const props = (this.properties.doricModel as NativeViewModel).props as Partial<Image>
       this.setData({
-        doricModel: this.properties.doricModel,
-        cssStyle
+        cssStyle: toCSSStyle(this.properties.doricStyle),
+        url:props.imageUrl
       })
     }
   }

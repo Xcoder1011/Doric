@@ -1,11 +1,15 @@
 import { NativeViewModel } from "doric"
 
-export function getChildren(nativeViewModel:NativeViewModel){
+export function toCSSStyle(css: Record<string, any>) {
+  return Object.entries(css).map(e => `${e[0]}:${e[1]}`).join(";")
+}
+
+export function getChildren(nativeViewModel: NativeViewModel) {
   let children = undefined
-  if(nativeViewModel.props.children){
-      const childrenViewIds = nativeViewModel.props.children as string[]
-      const subviews = nativeViewModel.props.subviews as NativeViewModel[]
-      children = childrenViewIds.map(e=> subviews.find(subview=>subview.id === e))
+  if (nativeViewModel.props.children) {
+    const childrenViewIds = nativeViewModel.props.children as string[]
+    const subviews = nativeViewModel.props.subviews as NativeViewModel[]
+    children = childrenViewIds.map(e => subviews.find(subview => subview.id === e))
   }
   return children
 }
@@ -14,7 +18,7 @@ export function getChildren(nativeViewModel:NativeViewModel){
 export function toRGBAString(color: number) {
   let strs = []
   for (let i = 0; i < 32; i += 8) {
-      strs.push(((color >> i) & 0xff))
+    strs.push(((color >> i) & 0xff))
   }
   strs = strs.reverse()
   /// RGBAd

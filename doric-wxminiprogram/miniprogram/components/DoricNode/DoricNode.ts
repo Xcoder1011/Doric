@@ -1,4 +1,4 @@
-import { LayoutSpec ,NativeViewModel } from "doric"
+import { LayoutSpec, NativeViewModel, View } from "doric"
 import { toPixelString, toRGBAString } from "../../doric/utils"
 
 // compoents/DoricNode.ts
@@ -8,9 +8,6 @@ Component({
    */
   properties: {
     doricModel: {
-      type: Object
-    },
-    doricParentModel: {
       type: Object
     },
   },
@@ -31,58 +28,19 @@ Component({
   lifetimes: {
     attached: function () {
       const doricModel = this.properties.doricModel as NativeViewModel
-      const props = doricModel.props
+      const props = doricModel.props as Partial<View>
       const doricStyle: Record<string, string> = {}
-      if (this.properties.doricParentModel) {
-        let space = 0
-        let parentType = this.properties.doricParentModel.nativeViewModel.type
-
-        if (parentType === "VLayout" || parentType === "HLayout") {
-          const parentProps = this.properties.doricParentModel.nativeViewModel.props
-          if (parentProps.space) {
-            space = parentProps.space
-          }
-        }
-
-        let isLast = false
-        for (let index = 0; index < this.properties.doricParentModel.children.length; index++) {
-          const element = this.properties.doricParentModel.children[index];
-          if (element.nativeViewModel.id === this.properties.doricModel.viewId) {
-            if (index == this.properties.doricParentModel.children.length - 1) {
-              isLast = true
-            }
-          }
-        }
-
-        if (props.layoutConfig) {
-          doricStyle["margin-left"] = toPixelString(props.layoutConfig?.margin?.left || 0)
-          if (parentType === "HLayout") {
-            doricStyle["margin-right"] = toPixelString(isLast ? 0 : space
-              + (props.layoutConfig?.margin?.right || 0))
-          } else {
-            doricStyle["margin-right"] = toPixelString(props.layoutConfig?.margin?.right || 0)
-          }
-
-          doricStyle["margin-top"] = toPixelString(props.layoutConfig?.margin?.top || 0)
-
-          if (parentType === "VLayout") {
-            doricStyle["margin-bottom"] = toPixelString(isLast ? 0 : space + (props.layoutConfig?.margin?.bottom || 0))
-          } else {
-            doricStyle["margin-bottom"] = toPixelString(props.layoutConfig?.margin?.bottom || 0)
-          }
-        }
-      }
 
       if (props.border) {
         doricStyle["border-style"] = "solid"
         doricStyle["border-width"] = toPixelString(props.border.width)
-        doricStyle["border-color"] = toRGBAString(props.border.color)
+        doricStyle["border-color"] = toRGBAString(props.border.color as unknown as number)
       }
       if (props.padding) {
-        doricStyle["padding-left"] = toPixelString(props.padding.left)
-        doricStyle["padding-right"] = toPixelString(props.padding.right)
-        doricStyle["padding-top"] = toPixelString(props.padding.top)
-        doricStyle["padding-bottom"] = toPixelString(props.padding.bottom)
+        doricStyle["padding-left"] = toPixelString(props.padding.left || 0)
+        doricStyle["padding-right"] = toPixelString(props.padding.right || 0)
+        doricStyle["padding-top"] = toPixelString(props.padding.top || 0)
+        doricStyle["padding-bottom"] = toPixelString(props.padding.bottom || 0)
       }
       let width: string
       const widthSpec = props.layoutConfig?.widthSpec || LayoutSpec.JUST;
@@ -95,9 +53,9 @@ Component({
           break
         case LayoutSpec.JUST:
         default:
-          width = toPixelString(props.width || 0
-            - props.padding?.left || 0
-            - props.padding?.right || 0
+          width = toPixelString((props.width || 0)
+            - (props.padding?.left || 0)
+            - (props.padding?.right || 0)
             - (props.border?.width || 0) * 2)
           break
       }
@@ -113,16 +71,16 @@ Component({
           break
         case LayoutSpec.JUST:
         default:
-          height = toPixelString(props.height || 0
-            - props.padding?.top || 0
-            - props.padding?.bottom || 0
+          height = toPixelString((props.height || 0)
+            - (props.padding?.top || 0)
+            - (props.padding?.bottom || 0)
             - (props.border?.width || 0) * 2)
           break
       }
       doricStyle["height"] = height
 
       if (props.backgroundColor !== undefined) {
-        doricStyle["background-color"] = toRGBAString(props.backgroundColor)
+        doricStyle["background-color"] = toRGBAString(props.backgroundColor as unknown as number)
       }
 
       this.setData({

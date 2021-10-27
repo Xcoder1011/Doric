@@ -23,7 +23,20 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    onload: function(event: any) {
+      const doricStyle = this.properties.doricStyle
+      if (doricStyle["width"] === "max-content") {
+        doricStyle["width"] = `${event.detail.width}px`
+      }
+      if (doricStyle["height"] === "max-content") {
+        doricStyle["height"] = `${event.detail.height}px`
+      }
 
+      const cssStyle = Object.entries(doricStyle).map(e => `${e[0]}:${e[1]}`).join(";")
+      this.setData({
+        cssStyle
+      })
+    }
   },
   lifetimes: {
     attached: function () {

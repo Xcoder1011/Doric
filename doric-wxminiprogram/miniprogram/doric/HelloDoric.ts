@@ -7,7 +7,6 @@ import {
   layoutConfig,
   Panel,
   Group,
-  hlayout,
 } from "doric";
 
 export class HelloDoric extends Panel {
@@ -16,16 +15,9 @@ export class HelloDoric extends Panel {
       [
         image({
           imageUrl: "https://doric.pub/logo.png",
-          layoutConfig:layoutConfig().just(),
-          width:200,
-          height:200,
         }),
         text({
           text: "Hello,    Doric",
-          layoutConfig:layoutConfig().just(),
-          width:50,
-          backgroundColor:Color.YELLOW,
-          height:50,
           textSize: 12,
           textColor: Color.RED,
         }),
@@ -39,12 +31,6 @@ export class HelloDoric extends Panel {
           textSize: 20,
           textColor: Color.GREEN,
         }),
-        hlayout([],{
-          layoutConfig:layoutConfig().just(),
-          width:200,
-          height:50,
-          backgroundColor:Color.RED
-        })
       ],
       {
         layoutConfig: layoutConfig().fit().configAlignment(Gravity.Center),

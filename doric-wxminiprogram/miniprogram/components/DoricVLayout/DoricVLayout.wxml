@@ -1,4 +1,4 @@
 <!--compoents/DoricVLayout/DoricVLayout.wxml-->
-<view class="doric-vlayout">
-<DoricNode wx:for="{{doricModel.children}}" wx:key="{{item.viewId}}" doricModel="{{item}}" id="{{item.viewId}}" />
+<view class="doric-vlayout" style="{{cssStyle}}">
+    <DoricNode wx:for="{{doricModel.children}}" wx:key="viewId" doricModel="{{item}}" id="{{item.viewId}}" />
 </view>

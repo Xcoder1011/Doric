@@ -16,3 +16,21 @@ export function pixelString2Number(v: string) {
 export function toPixelString(v: number) {
   return `${v}px`
 }
+
+const SPECIFIED = 1
+const START = 1 << 1
+const END = 1 << 2
+
+const SHIFT_X = 0
+const SHIFT_Y = 4
+
+export const LEFT = (START | SPECIFIED) << SHIFT_X
+export const RIGHT = (END | SPECIFIED) << SHIFT_X
+
+export const TOP = (START | SPECIFIED) << SHIFT_Y
+export const BOTTOM = (END | SPECIFIED) << SHIFT_Y
+
+export const CENTER_X = SPECIFIED << SHIFT_X
+export const CENTER_Y = SPECIFIED << SHIFT_Y
+
+export const CENTER = CENTER_X | CENTER_Y

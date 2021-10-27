@@ -36,7 +36,7 @@ Page({
       const width = res[0].width
       const height = res[0].height
       Reflect.apply(buildCallback, panel, [{ width, height }])
-      self.setData({ doricModel: panel.getRootView() })
+      self.setData({ doricModel: panel.getRootView().toModel() })
     })
   },
 

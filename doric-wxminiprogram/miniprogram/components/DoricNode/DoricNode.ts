@@ -1,4 +1,4 @@
-import { LayoutSpec } from "doric"
+import { LayoutSpec ,NativeViewModel } from "doric"
 import { toPixelString, toRGBAString } from "../../doric/utils"
 
 // compoents/DoricNode.ts
@@ -19,7 +19,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    subModels: {}
   },
 
   /**
@@ -30,7 +30,8 @@ Component({
   },
   lifetimes: {
     attached: function () {
-      const props = this.properties.doricModel.nativeViewModel.props
+      const doricModel = this.properties.doricModel as NativeViewModel
+      const props = doricModel.props
       const doricStyle: Record<string, string> = {}
       if (this.properties.doricParentModel) {
         let space = 0

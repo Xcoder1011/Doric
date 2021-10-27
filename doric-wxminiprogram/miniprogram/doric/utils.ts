@@ -1,3 +1,15 @@
+import { NativeViewModel } from "doric"
+
+export function getChildren(nativeViewModel:NativeViewModel){
+  let children = undefined
+  if(nativeViewModel.props.children){
+      const childrenViewIds = nativeViewModel.props.children as string[]
+      const subviews = nativeViewModel.props.subviews as NativeViewModel[]
+      children = childrenViewIds.map(e=> subviews.find(subview=>subview.id === e))
+  }
+  return children
+}
+
 
 export function toRGBAString(color: number) {
   let strs = []

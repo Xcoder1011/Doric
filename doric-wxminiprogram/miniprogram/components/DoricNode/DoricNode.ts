@@ -8,7 +8,8 @@ Component({
    */
   properties: {
     doricModel: {
-      type: Object
+      type: Object,
+      observer:"onUpdate"
     }
   },
 
@@ -23,20 +24,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onClick: function () {
-      const doricModel = this.properties.doricModel as DoricModel
-      const props = doricModel.nativeViewModel.props as Partial<View>
-      if (doricModel.idList, props.onClick) {
-        callResponse(doricModel.contextId, doricModel.idList, props.onClick as unknown as string)
-      }
-    }
-  },
-  lifetimes: {
-    attached: function () {
+    onUpdate: function () {
       const doricModel = this.properties.doricModel as DoricModel
       const props = doricModel.nativeViewModel.props as Partial<View>
       const doricStyle: Record<string, string> = doricModel.cssStyle
-
       if (props.border) {
         doricStyle["border-style"] = "solid"
         doricStyle["border-width"] = toPixelString(props.border.width)
@@ -93,6 +84,13 @@ Component({
         doricModel: doricModel,
         type: doricModel.nativeViewModel.type
       })
+    },
+    onClick: function () {
+      const doricModel = this.properties.doricModel as DoricModel
+      const props = doricModel.nativeViewModel.props as Partial<View>
+      if (doricModel.idList, props.onClick) {
+        callResponse(doricModel.contextId, doricModel.idList, props.onClick as unknown as string)
+      }
     }
-  }
+  },
 })

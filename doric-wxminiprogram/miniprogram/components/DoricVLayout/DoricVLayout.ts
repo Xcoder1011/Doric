@@ -8,7 +8,8 @@ Component({
    */
   properties: {
     doricModel: {
-      type: Object
+      type: Object,
+      observer:"onUpdate",
     },
   },
 
@@ -23,10 +24,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
-  },
-  lifetimes: {
-    attached: function () {
+    onUpdate: function () {
       const doricModel = this.properties.doricModel as DoricModel
       const nativeViewModel = doricModel.nativeViewModel
       const props = nativeViewModel.props as Partial<VLayout>
@@ -59,5 +57,5 @@ Component({
         children: getChildren(doricModel)
       })
     }
-  }
+  },
 })

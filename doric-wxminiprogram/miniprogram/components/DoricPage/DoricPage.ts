@@ -1,5 +1,5 @@
 import { uniqueId } from "doric"
-import { createContext } from "../../doric/context"
+import { callEntityMethod, createContext } from "../../doric/context"
 import { HelloDoric } from "../../doric/HelloDoric"
 import { SnakePanel } from "../../doric/Snake"
 import { DoricModel } from "../../doric/utils"
@@ -8,12 +8,6 @@ const contextId = uniqueId("context")
 const context = createContext(contextId, HelloDoric)
 const panel = context.entity
 
-const createCallback = Reflect.get(panel, "__onCreate__")
-const initCallback = Reflect.get(panel, "__init__")
-const buildCallback = Reflect.get(panel, "__build__")
-const showCallback = Reflect.get(panel, "__onShow__")
-const hideCallback = Reflect.get(panel, "__onHidden__")
-const destroyCallback = Reflect.get(panel, "__onDestroy__")
 
 // compoents/DoricPage/DoricPage.ts
 Page({
@@ -28,20 +22,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    Reflect.apply(createCallback, panel, [])
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-    let query = wx.createSelectorQuery().in(this)
-    const self = this
-    query.select('.doric-container').boundingClientRect().exec(function (res) {
-      const width = res[0].width
-      const height = res[0].height
-      Reflect.apply(buildCallback, panel, [{ width, height }])
-      self.setData({
+    context.hookAfter = () => {
+      console.log("hookAfter",panel.getRootView().toModel())
+      this.setData({
         doricModel: {
           contextId,
           nativeViewModel: panel.getRootView().toModel(),
@@ -49,6 +32,19 @@ Page({
           idList: [panel.getRootView().viewId]
         } as DoricModel
       })
+    }
+    callEntityMethod(context.id, "__onCreate__")
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady() {
+    let query = wx.createSelectorQuery().in(this)
+    query.select('.doric-container').boundingClientRect().exec(function (res) {
+      const width = res[0].width
+      const height = res[0].height
+      callEntityMethod(context.id, "__build__", { width, height })
     })
   },
 
@@ -56,21 +52,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    Reflect.apply(showCallback, panel, [])
+    callEntityMethod(context.id, "__onShow__")
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide() {
-    Reflect.apply(hideCallback, panel, [])
+    callEntityMethod(context.id, "__onHidden__")
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-    Reflect.apply(destroyCallback, panel, [])
+    callEntityMethod(context.id, "__onDestroy__")
   },
 
   /**

@@ -8,10 +8,8 @@ Component({
    */
   properties: {
     doricModel: {
-      type: Object
-    },
-    doricStyle: {
-      type: Object
+      type: Object,
+      observer:"onUpdate"
     },
   },
 
@@ -26,23 +24,19 @@ Component({
    * 组件的方法列表
    */
   methods: {
-  },
-  lifetimes: {
-    attached: function () {
+    onUpdate: function () {
       const props = (this.properties.doricModel as DoricModel).nativeViewModel.props as Partial<Text>
       const doricStyle = (this.properties.doricModel as DoricModel).cssStyle
       if (props.textSize) {
         doricStyle["font-size"] = toPixelString(props.textSize)
       }
-
       if (props.textColor) {
         doricStyle["color"] = toRGBAString(props.textColor as unknown as number)
       }
-
       this.setData({
         cssStyle: toCSSStyle(doricStyle),
         text: props.text,
       })
     }
-  }
+  },
 })

@@ -1,4 +1,3 @@
-import { NativeViewModel } from "doric"
 import { DoricModel, getChildren, toCSSStyle } from "../../doric/utils"
 
 // compoents/DoricRoot/DoricRoot.ts
@@ -8,7 +7,8 @@ Component({
    */
   properties: {
     doricModel: {
-      type: Object
+      type: Object,
+      observer:"onUpdate"
     },
   },
 
@@ -23,15 +23,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
-  },
-  lifetimes: {
-    attached: function () {
+    onUpdate:function(){
       const doricModel = this.properties.doricModel as DoricModel
       this.setData({
         cssStyle: toCSSStyle(doricModel.cssStyle),
         children: getChildren(doricModel)
       })
     }
-  }
+  },
 })

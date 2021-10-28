@@ -7,32 +7,24 @@ import {
   layoutConfig,
   Panel,
   Group,
+  Text,
 } from "doric";
 
 export class HelloDoric extends Panel {
   build(root: Group) {
+    let count = 0;
+    let tv: Text
     vlayout(
       [
         image({
           imageUrl: "https://doric.pub/logo.png",
-          onClick:()=>{
-            console.log("This is a test")
+          onClick: () => {
+            tv.text = `${++count}`
           }
         }),
-        text({
-          text: "Hello,    Doric",
-          textSize: 12,
-          textColor: Color.RED,
-        }),
-        text({
-          text: "Hello,Doric",
-          textSize: 16,
-          textColor: Color.BLUE,
-        }),
-        text({
-          text: "Hello,Doric",
+        tv = text({
+          text: `${count}`,
           textSize: 20,
-          textColor: Color.GREEN,
         }),
       ],
       {

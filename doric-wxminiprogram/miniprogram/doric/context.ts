@@ -23,6 +23,7 @@ export function callEntityMethod(contextId: string, methodName: string, ..._: an
       argumentsList.push(arguments[i])
     }
     const ret = Reflect.apply(Reflect.get(context.entity, methodName), context.entity, argumentsList)
+    context.hookAfter?.()
     return ret
   } else {
     console.error(`Cannot find method for context id:${contextId},method name is:${methodName}`)
@@ -45,6 +46,8 @@ export function obtainContext(contextId: string) {
 export class Context implements BridgeContext {
   id: string;
   entity: Panel;
+  hookAfter: Function | undefined
+
   constructor(id: string, clz: ClassType<Panel>) {
     this.id = id;
     this.entity = new clz

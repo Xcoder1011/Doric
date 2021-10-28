@@ -1,7 +1,7 @@
 <template>
   <view class="doric-vlayout" :style="cssStyle">
     <DoricNode
-      v-for="item in children"
+      v-for="(item, index) in children"
       v-bind:key="item.nativeViewModel.id"
       :doricModelProps="item"
       :style="index == children.length - 1 ? null : style"

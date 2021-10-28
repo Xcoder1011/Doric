@@ -1,6 +1,6 @@
-import { LayoutSpec, NativeViewModel, View } from "doric"
-import { toPixelString, toRGBAString ,DoricModel} from "../../doric/utils"
-import { obtainContext } from "../../doric/context"
+import { LayoutSpec, View } from "doric"
+import { toPixelString, toRGBAString, DoricModel } from "../../doric/utils"
+import { callResponse } from "../../doric/context"
 // compoents/DoricNode.ts
 Component({
   /**
@@ -23,7 +23,13 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onClick: function () {
+      const doricModel = this.properties.doricModel as DoricModel
+      const props = doricModel.nativeViewModel.props as Partial<View>
+      if (doricModel.idList, props.onClick) {
+        callResponse(doricModel.contextId, doricModel.idList, props.onClick as unknown as string)
+      }
+    }
   },
   lifetimes: {
     attached: function () {
@@ -85,7 +91,7 @@ Component({
       doricModel.cssStyle = doricStyle
       this.setData({
         doricModel: doricModel,
-        type:doricModel.nativeViewModel.type
+        type: doricModel.nativeViewModel.type
       })
     }
   }

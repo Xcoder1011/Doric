@@ -15,6 +15,9 @@ export class HelloDoric extends Panel {
       [
         image({
           imageUrl: "https://doric.pub/logo.png",
+          onClick:()=>{
+            console.log("This is a test")
+          }
         }),
         text({
           text: "Hello,    Doric",

@@ -2,6 +2,33 @@ import { BridgeContext, Panel, ClassType } from "doric";
 
 const gContexts: Map<string, Context> = new Map
 
+export function callResponse(contextId: string, idList: string[], funcId: string, args?: any) {
+  return callEntityMethod(contextId, "__response__", idList, funcId, args);
+}
+
+export function callEntityMethod(contextId: string, methodName: string, ..._: any) {
+  const context = gContexts.get(contextId)
+  if (context === undefined) {
+    console.error(`Cannot find context for context id:${contextId}`)
+    return
+  }
+  if (context.entity === undefined) {
+    console.error(`Cannot find holder for context id:${contextId}`)
+    return
+  }
+
+  if (Reflect.has(context.entity, methodName)) {
+    const argumentsList: any = []
+    for (let i = 2; i < arguments.length; i++) {
+      argumentsList.push(arguments[i])
+    }
+    const ret = Reflect.apply(Reflect.get(context.entity, methodName), context.entity, argumentsList)
+    return ret
+  } else {
+    console.error(`Cannot find method for context id:${contextId},method name is:${methodName}`)
+  }
+}
+
 export function createContext(contextId: string, clz: ClassType<Panel>) {
   const context = new Context(contextId, clz)
   gContexts.set(contextId, context)
@@ -11,7 +38,7 @@ export function createContext(contextId: string, clz: ClassType<Panel>) {
 export function destroyContext(contextId: string) {
   gContexts.delete(contextId)
 }
-export function obtainContext(contextId:string){
+export function obtainContext(contextId: string) {
   return gContexts.get(contextId)
 }
 

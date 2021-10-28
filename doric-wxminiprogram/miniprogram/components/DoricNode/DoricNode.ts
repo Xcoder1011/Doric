@@ -28,6 +28,13 @@ Component({
       const doricModel = this.properties.doricModel as DoricModel
       const props = doricModel.nativeViewModel.props as Partial<View>
       const doricStyle: Record<string, string> = doricModel.cssStyle
+
+      if (props.layoutConfig) {
+        doricStyle["margin-left"] = toPixelString(props.layoutConfig.margin?.left || 0)
+        doricStyle["margin-right"] = toPixelString(props.layoutConfig.margin?.right || 0)
+        doricStyle["margin-top"] = toPixelString(props.layoutConfig.margin?.top || 0)
+        doricStyle["margin-bottom"] = toPixelString(props.layoutConfig?.margin?.bottom || 0)
+      }
       if (props.border) {
         doricStyle["border-style"] = "solid"
         doricStyle["border-width"] = toPixelString(props.border.width)

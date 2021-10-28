@@ -1,7 +1,7 @@
 import { NativeViewModel, Text } from "doric"
 import { DoricModel, toCSSStyle, toPixelString, toRGBAString } from "../../doric/utils"
 
-// compoents/DoricText/DoricText.ts
+// components/DoricText/DoricText.ts
 Component({
   /**
    * 组件的属性列表
@@ -9,7 +9,7 @@ Component({
   properties: {
     doricModel: {
       type: Object,
-      observer:"onUpdate"
+      observer: "onUpdate"
     },
   },
 

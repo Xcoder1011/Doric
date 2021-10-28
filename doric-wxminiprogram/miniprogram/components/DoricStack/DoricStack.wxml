@@ -1,4 +1,4 @@
-<!--compoents/DoricStack/DoricStack.wxml-->
+<!--components/DoricStack/DoricStack.wxml-->
 <view class="doric-stack" style="{{cssStyle}}">
-    <DoricNode wx:for="{{children}}" wx:key="{{item.nativeViewModel.id}}" doricModel="{{item}}" id="{{item.nativeViewModel.id}}"/>
+    <DoricNode wx:for="{{children}}" wx:key="{{item.nativeViewModel.id}}" doricModel="{{item}}" id="{{item.nativeViewModel.id}}" />
 </view>

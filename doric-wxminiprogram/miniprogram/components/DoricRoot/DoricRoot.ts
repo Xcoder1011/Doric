@@ -1,6 +1,6 @@
 import { DoricModel, getChildren, toCSSStyle } from "../../doric/utils"
 
-// compoents/DoricRoot/DoricRoot.ts
+// components/DoricRoot/DoricRoot.ts
 Component({
   /**
    * 组件的属性列表
@@ -8,7 +8,7 @@ Component({
   properties: {
     doricModel: {
       type: Object,
-      observer:"onUpdate"
+      observer: "onUpdate"
     },
   },
 
@@ -23,7 +23,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onUpdate:function(){
+    onUpdate: function () {
       const doricModel = this.properties.doricModel as DoricModel
       this.setData({
         cssStyle: toCSSStyle(doricModel.cssStyle),

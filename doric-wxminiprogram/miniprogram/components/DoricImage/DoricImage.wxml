@@ -1,2 +1,2 @@
-<!--compoents/DoricImage/DoricImage.wxml-->
+<!--components/DoricImage/DoricImage.wxml-->
 <image bindload="onload" src="{{url}}" style="{{cssStyle}}"></image>

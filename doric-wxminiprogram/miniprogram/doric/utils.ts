@@ -21,7 +21,7 @@ export function getChildren(doricModel: DoricModel): DoricModel[] {
         contextId: doricModel.contextId,
         nativeViewModel: nativeViewModel,
         cssStyle: {},
-        idList: [...doricModel.idList,nativeViewModel.id]
+        idList: [...doricModel.idList, nativeViewModel.id]
       }
     })
   }

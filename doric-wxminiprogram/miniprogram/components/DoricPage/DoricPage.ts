@@ -9,7 +9,7 @@ const context = createContext(contextId, HelloDoric)
 const panel = context.entity
 
 
-// compoents/DoricPage/DoricPage.ts
+// components/DoricPage/DoricPage.ts
 Page({
 
   /**
@@ -23,7 +23,7 @@ Page({
    */
   onLoad() {
     context.hookAfter = () => {
-      console.log("hookAfter",panel.getRootView().toModel())
+      console.log("hookAfter", panel.getRootView().toModel())
       this.setData({
         doricModel: {
           contextId,

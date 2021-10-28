@@ -1,7 +1,7 @@
 import { NativeViewModel, Stack } from "doric"
 import { DoricModel, getChildren, toCSSStyle } from "../../doric/utils"
 
-// compoents/DoricStack/DoricStack.ts
+// components/DoricStack/DoricStack.ts
 Component({
   /**
    * 组件的属性列表

@@ -1,2 +1,2 @@
-<!--compoents/DoricText/DoricText.wxml-->
+<!--components/DoricText/DoricText.wxml-->
 <text class="doric-text" style="{{cssStyle}}">{{text}}</text>

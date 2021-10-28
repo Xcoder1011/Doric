@@ -1,4 +1,4 @@
-/* compoents/DoricHLayout/DoricHLayout.wxss */
+/* components/DoricHLayout/DoricHLayout.wxss */
 .doric-hlayout {
   display: flex;
   flex-direction: row;

@@ -1,4 +1,4 @@
-/* compoents/DoricVLayout/DoricVLayout.wxss */
+/* components/DoricVLayout/DoricVLayout.wxss */
 .doric-vlayout {
   display: flex;
   flex-direction: column;

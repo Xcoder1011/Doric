@@ -1,4 +1,4 @@
-<!--compoents/DoricNode.wxml-->
+<!--components/DoricNode.wxml-->
 <DoricText wx:if="{{type === 'Text'}}" doricModel="{{doricModel}}" bindtap="onClick" />
 <DoricImage wx:elif="{{type=== 'Image'}}" doricModel="{{doricModel}}" bindtap="onClick" />
 <DoricVLayout wx:elif="{{type === 'VLayout'}}" doricModel="{{doricModel}}" bindtap="onClick" />

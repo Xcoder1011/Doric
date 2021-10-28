@@ -1,7 +1,7 @@
 import { NativeViewModel, VLayout } from "doric"
 import { LEFT, RIGHT, CENTER_X, CENTER_Y, BOTTOM, TOP, getChildren, DoricModel } from "../../doric/utils"
 
-// compoents/DoricVLayout/DoricVLayout.ts
+// components/DoricVLayout/DoricVLayout.ts
 Component({
   /**
    * 组件的属性列表
@@ -9,7 +9,7 @@ Component({
   properties: {
     doricModel: {
       type: Object,
-      observer:"onUpdate",
+      observer: "onUpdate",
     },
   },
 

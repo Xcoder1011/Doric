@@ -1,4 +1,4 @@
-/* compoents/DoricText/DoricText.wxss */
+/* components/DoricText/DoricText.wxss */
 .doric-text {
     display: inline-block;
     overflow: hidden;

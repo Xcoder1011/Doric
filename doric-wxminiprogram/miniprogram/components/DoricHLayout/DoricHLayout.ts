@@ -1,7 +1,7 @@
 import { NativeViewModel } from "doric"
 import { DoricModel, getChildren, toCSSStyle } from "../../doric/utils"
 
-// compoents/DoricHLayout/DoricHLayout.ts
+// components/DoricHLayout/DoricHLayout.ts
 Component({
   /**
    * 组件的属性列表

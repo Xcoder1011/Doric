@@ -1,4 +1,4 @@
-<!--compoents/DoricPage/DoricPage.wxml-->
+<!--components/DoricPage/DoricPage.wxml-->
 <view class="doric-container">
-    <DoricNode contextId="{{contextId}}" doricModel="{{doricModel}}" wx:if="{{doricModel != null}}"></DoricNode>
+    <DoricNode contextId="{{contextId}}" doricModel="{{doricModel}}"></DoricNode>
 </view>

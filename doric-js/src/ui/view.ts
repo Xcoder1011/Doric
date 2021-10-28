@@ -66,6 +66,12 @@ export function createRef<T extends View>(): Ref<T> {
     return new Ref
 }
 
+let viewTreeObserver: Function | undefined = undefined;
+
+export function registerViewTreeObserver(observer: Function) {
+    viewTreeObserver = observer
+}
+
 export abstract class View implements Modeling {
     @Property
     width: number = 0
@@ -231,6 +237,7 @@ export abstract class View implements Modeling {
             newV = obj2Model(newV, (v) => this.callback2Id(v))
         }
         this.__dirty_props__[propKey] = newV
+        viewTreeObserver?.()
     }
 
     clean() {

@@ -2,11 +2,11 @@ import {
   image,
   text,
   Gravity,
-  Color,
   vlayout,
   layoutConfig,
   Panel,
   Group,
+  Color,
 } from "doric";
 
 export class HelloDoric extends Panel {

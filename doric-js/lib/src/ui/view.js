@@ -37,6 +37,10 @@ export class Ref {
 export function createRef() {
     return new Ref;
 }
+let viewTreeObserver = undefined;
+export function registerViewTreeObserver(observer) {
+    viewTreeObserver = observer;
+}
 export class View {
     constructor() {
         this.width = 0;
@@ -139,6 +143,7 @@ export class View {
             newV = obj2Model(newV, (v) => this.callback2Id(v));
         }
         this.__dirty_props__[propKey] = newV;
+        viewTreeObserver === null || viewTreeObserver === void 0 ? void 0 : viewTreeObserver();
     }
     clean() {
         for (const key in this.__dirty_props__) {

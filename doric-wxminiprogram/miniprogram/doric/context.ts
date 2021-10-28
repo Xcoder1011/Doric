@@ -1,6 +1,23 @@
-import { BridgeContext, Panel, ClassType } from "doric";
+import { BridgeContext, Panel, ClassType, registerViewTreeObserver } from "doric";
 
 const gContexts: Map<string, Context> = new Map
+
+const updator = () => {
+  gContexts.forEach(context => {
+    context.hookAfter?.()
+  })
+  updatorTask = undefined
+}
+
+let updatorTask: number | undefined = undefined
+
+registerViewTreeObserver(() => {
+  console.log("ttrt")
+  if (updatorTask !== undefined) {
+    return
+  }
+  updatorTask = setTimeout(updator, 0)
+})
 
 export function callResponse(contextId: string, idList: string[], funcId: string, args?: any) {
   return callEntityMethod(contextId, "__response__", idList, funcId, args);
@@ -22,9 +39,7 @@ export function callEntityMethod(contextId: string, methodName: string, ..._: an
     for (let i = 2; i < arguments.length; i++) {
       argumentsList.push(arguments[i])
     }
-    const ret = Reflect.apply(Reflect.get(context.entity, methodName), context.entity, argumentsList)
-    context.hookAfter?.()
-    return ret
+    return Reflect.apply(Reflect.get(context.entity, methodName), context.entity, argumentsList)
   } else {
     console.error(`Cannot find method for context id:${contextId},method name is:${methodName}`)
   }

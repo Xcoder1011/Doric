@@ -20,6 +20,7 @@ export declare class Ref<T extends View> {
     get current(): T;
 }
 export declare function createRef<T extends View>(): Ref<T>;
+export declare function registerViewTreeObserver(observer: Function): void;
 export declare abstract class View implements Modeling {
     width: number;
     height: number;

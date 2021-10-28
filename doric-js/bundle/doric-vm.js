@@ -1676,6 +1676,10 @@ class Ref {
 function createRef() {
     return new Ref;
 }
+let viewTreeObserver = undefined;
+function registerViewTreeObserver(observer) {
+    viewTreeObserver = observer;
+}
 class View {
     constructor() {
         this.width = 0;
@@ -1778,6 +1782,7 @@ class View {
             newV = obj2Model(newV, (v) => this.callback2Id(v));
         }
         this.__dirty_props__[propKey] = newV;
+        viewTreeObserver === null || viewTreeObserver === void 0 ? void 0 : viewTreeObserver();
     }
     clean() {
         for (const key in this.__dirty_props__) {
@@ -5229,6 +5234,7 @@ exports.obj2Model = obj2Model;
 exports.popover = popover;
 exports.pullable = pullable;
 exports.refreshable = refreshable;
+exports.registerViewTreeObserver = registerViewTreeObserver;
 exports.repeat = repeat;
 exports.scroller = scroller;
 exports.slideItem = slideItem;

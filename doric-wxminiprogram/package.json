@@ -7,7 +7,7 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "doric": "^0.9.11"
+    "doric": "file:../doric-js"
   },
   "devDependencies": {
     "miniprogram-api-typings": "^3.4.3"

@@ -203,6 +203,7 @@ declare module 'doric/lib/src/ui/view' {
             get current(): T;
     }
     export function createRef<T extends View>(): Ref<T>;
+    export function registerViewTreeObserver(observer: Function): void;
     export abstract class View implements Modeling {
             width: number;
             height: number;

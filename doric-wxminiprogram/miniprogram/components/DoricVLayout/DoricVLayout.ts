@@ -32,6 +32,9 @@ Component({
 
       if (props.space) {
         let space = props.space
+        this.setData({
+          style: `margin-bottom: ${space}px;`
+        })
       }
       if (props.gravity) {
         let gravity = props.gravity as unknown as number

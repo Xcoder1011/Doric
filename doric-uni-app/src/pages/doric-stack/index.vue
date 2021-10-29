@@ -2,6 +2,7 @@
   <view class="doric-stack" :style="cssStyle">
     <DoricNode
       v-for="(item) in children"
+      style="position: absolute;"
       v-bind:key="item.nativeViewModel.id"
       :doricModelProps="item"
     />

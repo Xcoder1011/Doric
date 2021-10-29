@@ -11,10 +11,11 @@ import { uniqueId } from "doric";
 import { callEntityMethod, createContext } from "../../doric/context";
 import { HelloDoric } from "../../doric/HelloDoric";
 import { SnakePanel } from "../../doric/Snake";
+import { LayoutDemo } from "../../doric/LayoutDemo";
 import { DoricModel } from "../../doric/utils";
 
 const contextId = uniqueId("context");
-const context = createContext(contextId, HelloDoric);
+const context = createContext(contextId, SnakePanel);
 const panel = context.entity;
 
 export default Vue.extend({

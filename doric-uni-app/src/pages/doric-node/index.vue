@@ -29,6 +29,11 @@
     :doricModelProps="doricModel"
     @click.native.stop="onclick"
   />
+  <DoricScroller
+    v-else-if="type === 'Scroller'"
+    :doricModelProps="doricModel"
+    @click.native.stop="onclick"
+  />
   <text v-else>Error:{{ type }}</text>
 </template>
 
@@ -45,6 +50,7 @@ import DoricVLayout from "../doric-vlayout/index.vue";
 import DoricHLayout from "../doric-hlayout/index.vue";
 import DoricStack from "../doric-stack/index.vue";
 import DoricRoot from "../doric-root/index.vue";
+import DoricScroller from "../doric-scroller/index.vue";
 
 export default Vue.extend({
   props: {
@@ -136,6 +142,16 @@ export default Vue.extend({
             props.backgroundColor as unknown as number
           );
         }
+
+        if (props.x) {
+          doricStyle["left"] = toPixelString(props.x);
+        }
+        if (props.y) {
+          doricStyle["top"] = toPixelString(props.y);
+        }
+
+        // console.log(doricModel.nativeViewModel.type, Object.keys(props));
+
         doricModel.cssStyle = doricStyle;
         this.$set(this.$data, "doricModel", doricModel);
         this.$set(this.$data, "type", doricModel.nativeViewModel.type);
@@ -162,12 +178,13 @@ export default Vue.extend({
     },
   },
   components: {
-    DoricText: DoricText,
-    DoricImage: DoricImage,
-    DoricHLayout: DoricHLayout,
-    DoricVLayout: DoricVLayout,
-    DoricStack: DoricStack,
-    DoricRoot: DoricRoot,
+    DoricText,
+    DoricImage,
+    DoricHLayout,
+    DoricVLayout,
+    DoricStack,
+    DoricRoot,
+    DoricScroller,
   },
 });
 </script>

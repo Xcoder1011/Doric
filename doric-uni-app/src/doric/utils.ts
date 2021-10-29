@@ -15,6 +15,9 @@ export function getChildren(doricModel: DoricModel): DoricModel[] {
   if (doricModel.nativeViewModel.props.children) {
     const childrenViewIds = doricModel.nativeViewModel.props.children as string[]
     const subviews = doricModel.nativeViewModel.props.subviews as NativeViewModel[]
+    if (childrenViewIds.length != subviews.length) {
+      return []
+    }
     return childrenViewIds.map(e => {
       const nativeViewModel = subviews.find(subview => subview.id === e) as NativeViewModel;
       return {

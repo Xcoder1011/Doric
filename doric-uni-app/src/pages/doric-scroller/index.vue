@@ -1,9 +1,10 @@
 <template>
-  <view class="doric-stack" :style="cssStyle">
+  <view class="doric-scroller" :style="cssStyle">
     <DoricNode
-      v-for="(item) in children"
+      v-for="(item, index) in children"
       v-bind:key="item.nativeViewModel.id"
       :doricModelProps="item"
+      :style="index == children.length - 1 ? null : style"
     />
   </view>
 </template>
@@ -41,8 +42,6 @@ export default Vue.extend({
 </script>
 
 <style>
-.doric-stack {
-  position: relative;
-  overflow: hidden;
+.doric-scroller {
 }
 </style>

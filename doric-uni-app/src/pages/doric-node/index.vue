@@ -1,10 +1,34 @@
 <template>
-  <DoricText v-if="type === 'Text'" :doricModelProps="doricModel" />
-  <DoricImage v-else-if="type === 'Image'" :doricModelProps="doricModel" />
-  <DoricVLayout v-else-if="type === 'VLayout'" :doricModelProps="doricModel" />
-  <DoricHLayout v-else-if="type === 'HLayout'" :doricModelProps="doricModel" />
-  <DoricStack v-else-if="type === 'Stack'" :doricModelProps="doricModel" />
-  <DoricRoot v-else-if="type === 'Root'" :doricModelProps="doricModel" />
+  <DoricText
+    v-if="type === 'Text'"
+    :doricModelProps="doricModel"
+    @click.native="onclick"
+  />
+  <DoricImage
+    v-else-if="type === 'Image'"
+    :doricModelProps="doricModel"
+    @click.native="onclick"
+  />
+  <DoricVLayout
+    v-else-if="type === 'VLayout'"
+    :doricModelProps="doricModel"
+    @click.native="onclick"
+  />
+  <DoricHLayout
+    v-else-if="type === 'HLayout'"
+    :doricModelProps="doricModel"
+    @click.native="onclick"
+  />
+  <DoricStack
+    v-else-if="type === 'Stack'"
+    :doricModelProps="doricModel"
+    @click.native="onclick"
+  />
+  <DoricRoot
+    v-else-if="type === 'Root'"
+    :doricModelProps="doricModel"
+    @click.native="onclick"
+  />
   <text v-else>Error:{{ type }}</text>
 </template>
 
@@ -124,7 +148,19 @@ export default Vue.extend({
       type: null,
     };
   },
-  methods: {},
+  methods: {
+    onclick: function (event: Event) {
+      const doricModel = this.$props.doricModelProps as DoricModel;
+      const props = doricModel.nativeViewModel.props as Partial<View>;
+      if ((doricModel.idList, props.onClick)) {
+        callResponse(
+          doricModel.contextId,
+          doricModel.idList,
+          props.onClick as unknown as string
+        );
+      }
+    },
+  },
   components: {
     DoricText: DoricText,
     DoricImage: DoricImage,

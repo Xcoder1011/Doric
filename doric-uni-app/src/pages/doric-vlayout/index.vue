@@ -39,10 +39,17 @@ export default Vue.extend({
         const props = nativeViewModel.props as Partial<VLayout>;
         const doricStyle = doricModel.cssStyle;
 
+        let childStyle = {} as Record<string, string>;
+        childStyle["flex-shrink"] = "0";
+        if (props.layoutConfig?.weight) {
+          childStyle["flex"] = `${props.layoutConfig?.weight}`;
+        }
+
         if (props.space) {
           let space = props.space;
-          this.$set(this.$data, "style", `margin-bottom: ${space}px;`);
+          childStyle["margin-bottom"] = `${space}px;`;
         }
+
         if (props.gravity) {
           let gravity = props.gravity as unknown as number;
           if ((gravity & LEFT) === LEFT) {
@@ -66,6 +73,13 @@ export default Vue.extend({
           .join(";");
         this.$set(this.$data, "cssStyle", cssStyle);
         this.$set(this.$data, "children", getChildren(doricModel));
+
+        let childStyleString = Object.entries(childStyle)
+          .map((e) => `${e[0]}:${e[1]}`)
+          .join(";");
+        console.log(childStyleString);
+
+        this.$set(this.$data, "style", childStyleString);
       },
     },
   },

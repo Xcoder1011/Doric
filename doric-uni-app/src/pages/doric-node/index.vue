@@ -70,7 +70,15 @@ export default Vue.extend({
           (newVal?.nativeViewModel?.props?.subviews as NativeViewModel[])
             ?.length || 0;
         if (childrenViewIdsLength != subviewsLength) {
-          return;
+          let type = newVal.nativeViewModel.type;
+          if (
+            type == "HLayout" ||
+            type == "VLayout" ||
+            type == "Root" ||
+            type == "Stack"
+          ) {
+            return;
+          }
         }
 
         // impl code

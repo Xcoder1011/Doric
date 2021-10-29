@@ -15,7 +15,7 @@ import { LayoutDemo } from "../../doric/LayoutDemo";
 import { DoricModel } from "../../doric/utils";
 
 const contextId = uniqueId("context");
-const context = createContext(contextId, SnakePanel);
+const context = createContext(contextId, LayoutDemo);
 const panel = context.entity;
 
 export default Vue.extend({

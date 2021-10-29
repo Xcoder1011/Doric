@@ -10,9 +10,10 @@
 </template>
 
 <script lang="ts">
+import { NativeViewModel } from "doric";
 import Vue from "vue";
 
-import { DoricModel, getChildren, toCSSStyle } from "../../doric/utils";
+import { DoricModel, toCSSStyle } from "../../doric/utils";
 
 export default Vue.extend({
   props: {
@@ -26,7 +27,22 @@ export default Vue.extend({
       handler(newVal) {
         const doricModel = newVal as DoricModel;
         this.$set(this.$data, "cssStyle", toCSSStyle(doricModel.cssStyle));
-        this.$set(this.$data, "children", getChildren(doricModel));
+
+        let props = doricModel.nativeViewModel.props;
+        if (props.content) {
+          let subviews = doricModel.nativeViewModel.props
+            .subviews as NativeViewModel[];
+          console.log(subviews);
+          let children = subviews.map((nativeViewModel) => {
+            return {
+              contextId: doricModel.contextId,
+              nativeViewModel: nativeViewModel,
+              cssStyle: {},
+              idList: [...doricModel.idList, nativeViewModel.id],
+            };
+          });
+          this.$set(this.$data, "children", children);
+        }
       },
     },
   },
@@ -43,5 +59,6 @@ export default Vue.extend({
 
 <style>
 .doric-scroller {
+  overflow: scroll;
 }
 </style>

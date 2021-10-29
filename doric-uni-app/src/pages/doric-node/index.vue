@@ -40,7 +40,7 @@
 <script lang="ts">
 import Vue from "vue";
 
-import { LayoutSpec, View } from "doric";
+import { LayoutSpec, NativeViewModel, View } from "doric";
 import { toPixelString, toRGBAString, DoricModel } from "../../doric/utils";
 import { callResponse } from "../../doric/context";
 
@@ -63,6 +63,17 @@ export default Vue.extend({
       immediate: true,
       handler(newVal) {
         if (!newVal) return;
+
+        const childrenViewIdsLength =
+          (newVal?.nativeViewModel?.props?.children as string[])?.length || 0;
+        const subviewsLength =
+          (newVal?.nativeViewModel?.props?.subviews as NativeViewModel[])
+            ?.length || 0;
+        if (childrenViewIdsLength != subviewsLength) {
+          return;
+        }
+
+        // impl code
         const doricModel = newVal as DoricModel;
         const props = doricModel.nativeViewModel.props as Partial<View>;
         const doricStyle: Record<string, string> = doricModel.cssStyle;

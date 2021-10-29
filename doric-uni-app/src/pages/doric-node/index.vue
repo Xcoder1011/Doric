@@ -2,32 +2,32 @@
   <DoricText
     v-if="type === 'Text'"
     :doricModelProps="doricModel"
-    @click.native="onclick"
+    @click.native.stop="onclick"
   />
   <DoricImage
     v-else-if="type === 'Image'"
     :doricModelProps="doricModel"
-    @click.native="onclick"
+    @click.native.stop="onclick"
   />
   <DoricVLayout
     v-else-if="type === 'VLayout'"
     :doricModelProps="doricModel"
-    @click.native="onclick"
+    @click.native.stop="onclick"
   />
   <DoricHLayout
     v-else-if="type === 'HLayout'"
     :doricModelProps="doricModel"
-    @click.native="onclick"
+    @click.native.stop="onclick"
   />
   <DoricStack
     v-else-if="type === 'Stack'"
     :doricModelProps="doricModel"
-    @click.native="onclick"
+    @click.native.stop="onclick"
   />
   <DoricRoot
     v-else-if="type === 'Root'"
     :doricModelProps="doricModel"
-    @click.native="onclick"
+    @click.native.stop="onclick"
   />
   <text v-else>Error:{{ type }}</text>
 </template>

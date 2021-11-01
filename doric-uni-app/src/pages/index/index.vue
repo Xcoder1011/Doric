@@ -7,7 +7,7 @@
 <script lang="ts">
 import Vue from "vue";
 
-import { uniqueId } from "doric";
+import { ClassType, Panel, uniqueId } from "doric";
 import { callEntityMethod, createContext } from "../../doric/context";
 import { DoricModel } from "../../doric/utils";
 import { Modal } from "../../doric/plugin/modal";
@@ -19,21 +19,35 @@ import { Gobang } from "../../demo/Gobang";
 
 let global = new Function("return this")();
 
-const contextId = uniqueId("context");
-const context = createContext(contextId, Gobang);
-const panel = context.entity;
-
-global.context = context;
-
-context.plugins.set("modal", new Modal(context));
-
 export default Vue.extend({
   data() {
     return {
       doricModel: null,
     };
   },
-  onLoad() {
+  onLoad(option: AnyObject) {
+    let name = option.name;
+
+    const contextId = uniqueId("context");
+
+    let classType: ClassType<Panel>;
+    if (name == "HelloDoric") {
+      classType = HelloDoric;
+    } else if (name == "Snake") {
+      classType = SnakePanel;
+    } else if (name == "LayoutDemo") {
+      classType = LayoutDemo;
+    } else if (name == "Gobang") {
+      classType = Gobang;
+    }
+    const context = createContext(contextId, classType!!);
+
+    const panel = context.entity;
+
+    global.context = context;
+
+    context.plugins.set("modal", new Modal(context));
+
     context.hookAfter = () => {
       console.log("hookAfter", panel.getRootView().toModel());
       this.$set(this.$data, "doricModel", {

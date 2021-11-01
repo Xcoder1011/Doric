@@ -1,4 +1,4 @@
-import { callResolve, Context, DoricPlugin } from "../context";
+import { callReject, callResolve, Context, DoricPlugin } from "../context";
 
 export class Modal extends DoricPlugin {
   constructor(context: Context) {

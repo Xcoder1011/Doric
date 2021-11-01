@@ -32,7 +32,6 @@ export default Vue.extend({
         if (props.content) {
           let subviews = doricModel.nativeViewModel.props
             .subviews as NativeViewModel[];
-          console.log(subviews);
           let children = subviews.map((nativeViewModel) => {
             return {
               contextId: doricModel.contextId,

@@ -10,29 +10,22 @@ import Vue from "vue";
 import { uniqueId } from "doric";
 import { callEntityMethod, createContext } from "../../doric/context";
 import { DoricModel } from "../../doric/utils";
+import { Modal } from "../../doric/plugin/modal";
 
 import { HelloDoric } from "../../demo/HelloDoric";
 import { SnakePanel } from "../../demo/Snake";
 import { LayoutDemo } from "../../demo/LayoutDemo";
 import { Gobang } from "../../demo/Gobang";
 
+let global = new Function("return this")();
+
 const contextId = uniqueId("context");
 const context = createContext(contextId, Gobang);
 const panel = context.entity;
 
-let global = new Function("return this")();
-global.nativeBridge = (
-  contextId: string,
-  namespace: string,
-  method: string,
-  callbackId?: string,
-  args?: any
-) => {
-  console.log("nativeBridge", contextId);
-  console.log("nativeBridge", namespace);
-  console.log("nativeBridge", callbackId);
-  console.log("nativeBridge", args);
-};
+global.context = context;
+
+context.plugins.set("modal", new Modal(context));
 
 export default Vue.extend({
   data() {

@@ -58,7 +58,7 @@ export default Vue.extend({
         }
 
         this.$set(this.$data, "children", children);
-        this.$set(this.$data, "childStyles",childStyles);
+        this.$set(this.$data, "childStyles", childStyles);
       },
     },
   },

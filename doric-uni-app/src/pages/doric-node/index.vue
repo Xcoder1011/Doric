@@ -169,7 +169,13 @@ export default Vue.extend({
           doricStyle["top"] = toPixelString(props.y);
         }
 
-        // console.log(doricModel.nativeViewModel.type, Object.keys(props));
+        if (props.corners) {
+          if (typeof props.corners === "number") {
+            doricStyle["border-radius"] = toPixelString(
+              props.corners as number
+            );
+          }
+        }
 
         doricModel.cssStyle = doricStyle;
         this.$set(this.$data, "doricModel", doricModel);

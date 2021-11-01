@@ -9,13 +9,15 @@ import Vue from "vue";
 
 import { uniqueId } from "doric";
 import { callEntityMethod, createContext } from "../../doric/context";
-import { HelloDoric } from "../../doric/HelloDoric";
-import { SnakePanel } from "../../doric/Snake";
-import { LayoutDemo } from "../../doric/LayoutDemo";
 import { DoricModel } from "../../doric/utils";
 
+import { HelloDoric } from "../../doric/demo/HelloDoric";
+import { SnakePanel } from "../../doric/demo/Snake";
+import { LayoutDemo } from "../../doric/demo/LayoutDemo";
+import { Gobang } from "../../doric/demo/Gobang";
+
 const contextId = uniqueId("context");
-const context = createContext(contextId, LayoutDemo);
+const context = createContext(contextId, Gobang);
 const panel = context.entity;
 
 export default Vue.extend({

@@ -62,7 +62,6 @@ export default Vue.extend({
           .join(";");
         this.$set(this.$data, "cssStyle", cssStyle);
         let children = getChildren(doricModel);
-        this.$set(this.$data, "children", children);
 
         let childStyles: Array<String> = [];
 
@@ -95,7 +94,7 @@ export default Vue.extend({
           childStyles.push(childStyleString);
         }
 
-        console.log(childStyles);
+        this.$set(this.$data, "children", children);
         this.$set(this.$data, "childStyles", childStyles);
       },
     },

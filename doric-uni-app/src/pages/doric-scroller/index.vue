@@ -61,4 +61,7 @@ export default Vue.extend({
 .doric-scroller {
   overflow: scroll;
 }
+.doric-scroller::-webkit-scrollbar {
+  display: none;
+}
 </style>

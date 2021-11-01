@@ -4,7 +4,7 @@
       v-for="(item, index) in children"
       v-bind:key="item.nativeViewModel.id"
       :doricModelProps="item"
-      :style="index == children.length - 1 ? null : style"
+      :style="childStyles[index]"
     />
   </view>
 </template>
@@ -12,7 +12,7 @@
 <script lang="ts">
 import Vue from "vue";
 
-import { VLayout } from "doric";
+import { LayoutConfig, LayoutSpec, VLayout } from "doric";
 import {
   LEFT,
   RIGHT,
@@ -39,17 +39,6 @@ export default Vue.extend({
         const props = nativeViewModel.props as Partial<VLayout>;
         const doricStyle = doricModel.cssStyle;
 
-        let childStyle = {} as Record<string, string>;
-        childStyle["flex-shrink"] = "0";
-        if (props.layoutConfig?.weight) {
-          childStyle["flex"] = `${props.layoutConfig?.weight}`;
-        }
-
-        if (props.space) {
-          let space = props.space;
-          childStyle["margin-bottom"] = `${space}px;`;
-        }
-
         if (props.gravity) {
           let gravity = props.gravity as unknown as number;
           if ((gravity & LEFT) === LEFT) {
@@ -72,20 +61,47 @@ export default Vue.extend({
           .map((e) => `${e[0]}:${e[1]}`)
           .join(";");
         this.$set(this.$data, "cssStyle", cssStyle);
-        this.$set(this.$data, "children", getChildren(doricModel));
+        let children = getChildren(doricModel);
 
-        let childStyleString = Object.entries(childStyle)
-          .map((e) => `${e[0]}:${e[1]}`)
-          .join(";");
-        console.log(childStyleString);
+        let childStyles: Array<String> = [];
 
-        this.$set(this.$data, "style", childStyleString);
+        for (let index = 0; index < children.length; index++) {
+          const child = children[index];
+          let childStyle: Record<string, string> = {};
+
+          childStyle["flex-shrink"] = "0";
+          if (child.nativeViewModel.props.layoutConfig) {
+            let layoutConfig = child.nativeViewModel.props
+              .layoutConfig as LayoutConfig;
+
+            if (layoutConfig.widthSpec == LayoutSpec.MOST) {
+              childStyle["width"] = "100%";
+            }
+
+            if (layoutConfig.weight) {
+              childStyle["flex"] = `${layoutConfig?.weight}`;
+              layoutConfig.heightSpec = LayoutSpec.MOST;
+            }
+          }
+          if (props.space && index != children.length - 1) {
+            let space = props.space;
+            childStyle["margin-bottom"] = `${space}px;`;
+          }
+
+          let childStyleString = Object.entries(childStyle)
+            .map((e) => `${e[0]}:${e[1]}`)
+            .join(";");
+          childStyles.push(childStyleString);
+        }
+
+        this.$set(this.$data, "children", children);
+        this.$set(this.$data, "childStyles", childStyles);
       },
     },
   },
   data() {
     return {
-      style: null,
+      childStyles: null,
       children: null,
       cssStyle: null,
     };

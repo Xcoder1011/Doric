@@ -4,7 +4,7 @@
       v-for="(item, index) in children"
       v-bind:key="item.nativeViewModel.id"
       :doricModelProps="item"
-      :style="index == children.length - 1 ? null : style"
+      :style="childStyles[index]"
     />
   </view>
 </template>
@@ -12,7 +12,7 @@
 <script lang="ts">
 import Vue from "vue";
 
-import { HLayout } from "doric";
+import { HLayout, LayoutConfig, LayoutSpec } from "doric";
 import {
   LEFT,
   RIGHT,
@@ -39,10 +39,6 @@ export default Vue.extend({
         const props = nativeViewModel.props as Partial<HLayout>;
         const doricStyle = doricModel.cssStyle;
 
-        if (props.space) {
-          let space = props.space;
-          this.$set(this.$data, "style", `margin-right: ${space}px;`);
-        }
         if (props.gravity) {
           let gravity = props.gravity as unknown as number;
           if ((gravity & LEFT) === LEFT) {
@@ -65,7 +61,42 @@ export default Vue.extend({
           .map((e) => `${e[0]}:${e[1]}`)
           .join(";");
         this.$set(this.$data, "cssStyle", cssStyle);
-        this.$set(this.$data, "children", getChildren(doricModel));
+        let children = getChildren(doricModel);
+        this.$set(this.$data, "children", children);
+
+        let childStyles: Array<String> = [];
+
+        for (let index = 0; index < children.length; index++) {
+          const child = children[index];
+          let childStyle: Record<string, string> = {};
+
+          childStyle["flex-shrink"] = "0";
+          if (child.nativeViewModel.props.layoutConfig) {
+            let layoutConfig = child.nativeViewModel.props
+              .layoutConfig as LayoutConfig;
+
+            if (layoutConfig.heightSpec == LayoutSpec.MOST) {
+              childStyle["height"] = "100%";
+            }
+
+            if (layoutConfig.weight) {
+              childStyle["flex"] = `${layoutConfig?.weight}`;
+              layoutConfig.widthSpec = LayoutSpec.MOST;
+            }
+          }
+          if (props.space && index != children.length - 1) {
+            let space = props.space;
+            childStyle["margin-right"] = `${space}px;`;
+          }
+
+          let childStyleString = Object.entries(childStyle)
+            .map((e) => `${e[0]}:${e[1]}`)
+            .join(";");
+          childStyles.push(childStyleString);
+        }
+
+        console.log(childStyles);
+        this.$set(this.$data, "childStyles", childStyles);
       },
     },
   },
@@ -73,7 +104,7 @@ export default Vue.extend({
     return {
       children: null,
       cssStyle: null,
-      style: null,
+      childStyles: null,
     };
   },
 

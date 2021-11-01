@@ -7,7 +7,7 @@
 import Vue from "vue";
 
 import { Image } from "doric";
-import { DoricModel, toCSSStyle } from "../../doric/utils";
+import { DoricModel, toCSSStyle } from "../../../doric/utils";
 
 export default Vue.extend({
   props: {

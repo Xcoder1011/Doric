@@ -13,7 +13,7 @@
 import { NativeViewModel } from "doric";
 import Vue from "vue";
 
-import { DoricModel, toCSSStyle } from "../../doric/utils";
+import { DoricModel, toCSSStyle } from "../../../doric/utils";
 
 export default Vue.extend({
   props: {

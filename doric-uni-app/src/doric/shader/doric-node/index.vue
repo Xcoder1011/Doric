@@ -41,8 +41,8 @@
 import Vue from "vue";
 
 import { LayoutSpec, NativeViewModel, View } from "doric";
-import { toPixelString, toRGBAString, DoricModel } from "../../doric/utils";
-import { callResponse } from "../../doric/context";
+import { toPixelString, toRGBAString, DoricModel } from "../../../doric/utils";
+import { callResponse } from "../../../doric/context";
 
 import DoricText from "../doric-text/index.vue";
 import DoricImage from "../doric-image/index.vue";

@@ -20,7 +20,7 @@ import {
   toCSSStyle,
   toPixelString,
   toRGBAString,
-} from "../../doric/utils";
+} from "../../../doric/utils";
 
 export default Vue.extend({
   props: {

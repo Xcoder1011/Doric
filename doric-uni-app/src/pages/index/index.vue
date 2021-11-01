@@ -11,14 +11,28 @@ import { uniqueId } from "doric";
 import { callEntityMethod, createContext } from "../../doric/context";
 import { DoricModel } from "../../doric/utils";
 
-import { HelloDoric } from "../../doric/demo/HelloDoric";
-import { SnakePanel } from "../../doric/demo/Snake";
-import { LayoutDemo } from "../../doric/demo/LayoutDemo";
-import { Gobang } from "../../doric/demo/Gobang";
+import { HelloDoric } from "../../demo/HelloDoric";
+import { SnakePanel } from "../../demo/Snake";
+import { LayoutDemo } from "../../demo/LayoutDemo";
+import { Gobang } from "../../demo/Gobang";
 
 const contextId = uniqueId("context");
 const context = createContext(contextId, Gobang);
 const panel = context.entity;
+
+let global = new Function("return this")();
+global.nativeBridge = (
+  contextId: string,
+  namespace: string,
+  method: string,
+  callbackId?: string,
+  args?: any
+) => {
+  console.log("nativeBridge", contextId);
+  console.log("nativeBridge", namespace);
+  console.log("nativeBridge", callbackId);
+  console.log("nativeBridge", args);
+};
 
 export default Vue.extend({
   data() {

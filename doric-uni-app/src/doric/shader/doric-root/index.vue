@@ -11,7 +11,7 @@
 <script lang="ts">
 import Vue from "vue";
 
-import { DoricModel, getChildren, toCSSStyle } from "../../doric/utils";
+import { DoricModel, getChildren, toCSSStyle } from "../../../doric/utils";
 
 export default Vue.extend({
   props: {
